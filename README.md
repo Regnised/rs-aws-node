@@ -4,4 +4,4 @@ Task 3
 - Use endpoints get /products and  get /products/{productId}
 - Deployed lambda functions to AWS 
 - Added Api Getaway
-- 
+- Link to API: https://d49syb96q8.execute-api.eu-central-1.amazonaws.com/dev/products/
