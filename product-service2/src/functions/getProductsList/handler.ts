@@ -1,12 +1,13 @@
-import 'source-map-support/register';
-
 import { formatJSONResponse } from '@libs/apiGateway';
-import { middyfy } from '@libs/lambda';
 
 import products from '../../db/products';
+import { APIGatewayEvent } from 'aws-lambda';
 
-const getProductsList = async (event) => {
+const getProductsList = async (event: APIGatewayEvent) => {
+  console.log(`LAMBDA EVENT: ${JSON.stringify(event)}`);
+
   return formatJSONResponse(products);
 }
 
-export const main = middyfy(getProductsList);
+export default getProductsList;
+export const main = getProductsList;
