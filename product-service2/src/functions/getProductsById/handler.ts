@@ -10,7 +10,7 @@ const getProductsById = async (event: APIGatewayEvent) => {
 
   if (!product) {
     return {
-      statusCode: 204,
+      statusCode: 404,
       headers: {
         "Access-Control-Allow-Headers": "application/json",
         "Access-Control-Allow-Origin": "*",

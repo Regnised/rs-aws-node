@@ -8,4 +8,4 @@ module.exports = {
   moduleNameMapper: {
     "^@libs/apiGateway(.*)$": "<rootDir>/src/libs/apiGateway.ts"
   }
-};
+};  
