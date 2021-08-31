@@ -1,7 +1,7 @@
 {
-  "name": "product-service2",
+  "name": "product-service",
   "version": "1.0.0",
-  "description": "Serverless aws-nodejs-typescript template",
+  "description": "Arduino shop backend",
   "main": "serverless.ts",
   "scripts": {
     "test": "jest",
