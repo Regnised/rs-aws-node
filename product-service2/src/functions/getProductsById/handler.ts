@@ -1,18 +1,27 @@
-import 'source-map-support/register';
-
-import type { ValidatedEventAPIGatewayProxyEvent } from '@libs/apiGateway';
 import { formatJSONResponse } from '@libs/apiGateway';
-import { middyfy } from '@libs/lambda';
 
 import products from '../../db/products';
+import { APIGatewayEvent } from 'aws-lambda/trigger/api-gateway-proxy';
 
-import schema from './schema';
+const getProductsById = async (event: APIGatewayEvent) => {
+  console.log(`LOG LAMBDA getProductsById: ${JSON.stringify(event)}`);
+  const { productId } = event.pathParameters!;
+  const product = products.find((prod) => prod.id === productId);
 
-const getProductsById: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (event) => {
-  console.log(`LOG LAMBDA getProductsById`);
-  console.log(event);
+  if (!product) {
+    return {
+      statusCode: 404,
+      headers: {
+        "Access-Control-Allow-Headers": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
+      },
+      body: "Product not found"
+    }
+  }
 
-  return formatJSONResponse({ data: products });
+  return formatJSONResponse(product);
 }
 
-export const main = middyfy(getProductsById);
+export default getProductsById;
+export const main = getProductsById;
